@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "two_stage_framework", "two_stage_framework\two_stage_framework.pyproj", "{5CFE7565-478B-4915-9FD6-9165CB582489}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5CFE7565-478B-4915-9FD6-9165CB582489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CFE7565-478B-4915-9FD6-9165CB582489}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {781D9668-806C-4479-9089-ED39207F19DD}
+	EndGlobalSection
+EndGlobal
