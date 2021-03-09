@@ -1,10 +1,6 @@
 Multi-robot task allocation for safe planning under dynamic uncertainties
 ====
-(This paper is also available at [arxiv](https://arxiv.org/abs/2103.01840), furthermore the original Master Thesis work can be found in the [ETH Research Collection](https://www.research-collection.ethz.ch/handle/20.500.11850/471229).)
-
-**Abstract**
-This paper considers the problem of multi-robot safe mission planning in uncertain dynamic environments. This problem arises in several applications including safety-critical exploration, surveillance, and emergency rescue missions. Computation of a multi-robot optimal control policy is challenging not only because of the complexity of incorporating dynamic uncertainties while planning, but also because of the exponential growth in problem size as a function of the number of robots. Leveraging recent works obtaining a tractable safety maximizing plan for a single robot, we propose a scalable two-stage framework to solve the problem at hand. Specifically, the problem is split into a low-level single-agent planning problem and a high-level task allocation problem. The low-level problem uses an efficient approximation of stochastic reachability for a Markov decision process to handle the dynamic uncertainty.
-The task allocation, on the other hand, is solved using polynomial-time forward and reverse greedy heuristics. The safety objective of our multi-robot safe planning problem allows an implementation of the greedy heuristics through a distributed auction-based approach. Moreover, by leveraging the properties of the safety objective function, we ensure provable performance bounds on the safety of the approximate solutions proposed by these two heuristics. Our result is illustrated through case studies.
+This study is available at [arxiv](https://arxiv.org/abs/2103.01840), furthermore the original Master Thesis work can be found in the [ETH Research Collection](https://www.research-collection.ethz.ch/handle/20.500.11850/471229).
 
 **Repository content**
 This repository contains the implementation of the two-stage framework introduced in the paper along with the results for the respective case studies. We implemented the framework in python (see files in the [two_stage_framework](https://github.com/TihanyiD/multi_alloc/tree/master/two_stage_framework) folder) and provided a visual studio project [solution](https://github.com/TihanyiD/multi_alloc/blob/master/two_stage_framework.sln).
@@ -16,7 +12,7 @@ The purpose of the framework is to generate control policies for the robots whic
 
 By using the implementation presented in this repository, one can create new example environments and obtain solutions for them, or plot the pre-computed results of existing case studies.
 
-Opening existing case studies
+Examining existing case studies
 ----
 
 Follow the instructions below:
@@ -29,7 +25,7 @@ Follow the instructions below:
 open_case_study=True
 ```
 
-* Choose the case study by modifying the following line of code. 
+* Choose the case study by modifying the following line of code. (For now, only "case_study_1" is available. This will be updated shortly.)
 
 ```
 parameters=Parameters(name="case_study_1")
@@ -37,9 +33,9 @@ parameters=Parameters(name="case_study_1")
 
 * Run the code.
 
-The code generates the map of the example with the initial state of the hazard sources and the robots (make sure to hid "close" for the program to move on). The code then loads the pre-computed results. They are shown in the command line. The generated robot paths are shown in figures.
+The code generates the map of the example with the initial state of the hazard sources and the robots. The code then loads the pre-computed results. They are shown in the command line. The generated robot paths are shown in figures.
 
-Creating new example
+Creating a new example
 ----
 
 Follow the instructions below:
@@ -115,7 +111,7 @@ parameters.E=5000
 parameters.N=75
 ```
 
-* Set variable "parameters.p_stay=0" for a deterministic robot dynamics.
+* Set variable "parameters.p_stay=0" for a deterministic robot dynamics. Set a value between 0 and 1 for a non-deterministic robot dynamics. For example, if "parameters.p_stay=0.2", then the robot dynamics is defined as follows: the robot fails to move to the neighboring cells despite the control input and stays on the same cell with probability 0.2.
 ```
 parameters.p_stay=0
 ```
@@ -127,6 +123,8 @@ The code generates the map of the example with the initial state of the hazard s
 
 Contact
 ----
+
+Feel free to contact me for any queries via email.
 
 Daniel Tihanyi
 
