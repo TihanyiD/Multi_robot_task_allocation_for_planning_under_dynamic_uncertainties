@@ -25,10 +25,10 @@ Follow the instructions below:
 open_case_study=True
 ```
 
-* Choose the case study by modifying the following line of code. (For now, only "case_study_1" is available. This will be updated shortly.)
+* Choose the case study by modifying the following line of code. Available case studies: "case_study_1", "example_2_1", "example_2_2", "example_3_1", "example_3_2".
 
 ```
-parameters=Parameters(name="case_study_1")
+example_name="case_study_1"
 ```
 
 * Run the code.
@@ -51,7 +51,7 @@ open_case_study=False
 * Choose the name of the example you want to create by modifying the following line of code.
 
 ```
-parameters=Parameters(name="case_study_1")
+example_name="case_study_1"
 ```
 
 * Set up the map of the example by modifying the following line of code. The variable "parameters.map" should be a 2 dimensional binary "numpy" array where an entry of 1 represents an obstacle in the environment.
@@ -132,7 +132,7 @@ Daniel Tihanyi
 
 ETH Z&uuml;rich
 
-E-mail: [tihanyid@student.ethz.ch](tihanyid@student.ethz.ch)
+E-mail: [tihanyid@control.ee.ethz.ch](tihanyid@control.ee.ethz.ch)
 
 
 [Automatic Control Laboratory (IfA)]: http://control.ee.ethz.ch/
