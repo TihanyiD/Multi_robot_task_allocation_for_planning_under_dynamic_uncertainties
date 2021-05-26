@@ -17,14 +17,14 @@ class Path_Planner(object):
     def __init__(self,parameters):
         self.parameters=parameters
 
-    def set_up(self):
+    def set_up(self,path):
         print("Setting up path planner...\n")
         print("...Defining sets...")
         self.X=X_set(self)
         self.U_x=U_x_function(self)
         print("...Defining state transition dynamics...")
         self.Tau_X=Tau_X_dmatrix(self)
-        self.y_sampler=y_sampler(self)
+        self.y_sampler=y_sampler(self,path)
         print("...Preparing matrices for dynamic programming algorithm...")
         p_H_k_matrix.set_up(self)
         print("Finished setting up path planner!\n")

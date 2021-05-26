@@ -1,6 +1,7 @@
 import numpy as np
 import warnings
 import pickle
+import os
 
 from Parameters import Parameters
 from Drawer import Drawer
@@ -43,7 +44,8 @@ def sample_Tau_Ys(self,p_f,ys_k_1):
     return ys_k
 
 # Parameters
-parameters=Parameters(name="case_study_1")
+example_name="case_study_1"
+parameters=Parameters(name=example_name)
 open_case_study=True
 
 parameters.map=np.array([[1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1],
@@ -92,13 +94,18 @@ solution_file={"Read":open_case_study,"Name":"solution"}
 ### Main ###
 warnings.filterwarnings("ignore")
 
+rel_path='/case_studies/'+example_name+'/'
+path=os.getcwd()+rel_path
+if not os.path.exists(path):
+    os.makedirs(path)
+
 # Parameters
 if parameters_file["Read"]:
-    infile=open(parameters_file["Name"],'rb')
+    infile=open(path+parameters_file["Name"],'rb')
     parameters=pickle.load(infile)
     infile.close()
 else:
-    outfile=open(parameters_file["Name"],'wb')
+    outfile=open(path+parameters_file["Name"],'wb')
     pickle.dump(parameters,outfile)
     outfile.close()
 
@@ -109,63 +116,63 @@ parameters.solution_file=solution_file
 
 # Setting up
 path_planner=Path_Planner(parameters)
-path_planner.set_up()
+path_planner.set_up(path)
 
 Drawer(path_planner).draw_full_example()
 
 # Function frame
 if parameters.function_frame_file["Read"]:
     print("...Reading function frame...")
-    infile=open(parameters.function_frame_file["Name"],'rb')
+    infile=open(path+parameters.function_frame_file["Name"],'rb')
     function_frame=pickle.load(infile)
     infile.close()
 else:
     function_frame=Function_Frame(parameters,path_planner)
     print("...Saving function frame...")
-    outfile=open(parameters.function_frame_file["Name"],'wb')
+    outfile=open(path+parameters.function_frame_file["Name"],'wb')
     pickle.dump(function_frame,outfile)
     outfile.close()
 
 # Forward greedy
 allocator_fg=Forward_Greedy_Allocator(function_frame)
 if parameters.solution_file["Read"]:
-    infile=open(parameters.solution_file["Name"]+"_fg",'rb')
+    infile=open(path+parameters.solution_file["Name"]+"_fg",'rb')
     fg_solution=pickle.load(infile)
     infile.close()
 else:
     fg_solution=allocator_fg.solve_problem()
     allocator_fg.postprocess_solution(fg_solution)
-    fg_solution.save_solution(parameters.solution_file["Name"]+"_fg")
+    fg_solution.save_solution(path+parameters.solution_file["Name"]+"_fg")
 allocator_fg.show_solution(fg_solution)
 #allocator_fg.draw_solution_step_by_step(fg_solution,5)
 
 # Reverse greedy
 allocator_rg=Reverse_Greedy_Allocator(function_frame)
 if parameters.solution_file["Read"]:
-    infile=open(parameters.solution_file["Name"]+"_rg",'rb')
+    infile=open(path+parameters.solution_file["Name"]+"_rg",'rb')
     rg_solution=pickle.load(infile)
     infile.close()
 else:
     rg_solution=allocator_rg.solve_problem()
     allocator_rg.postprocess_solution(rg_solution)
-    rg_solution.save_solution(parameters.solution_file["Name"]+"_rg")
+    rg_solution.save_solution(path+parameters.solution_file["Name"]+"_rg")
 allocator_rg.show_solution(rg_solution)
 
 # Brute force
 allocator_bf=Brute_Force_Allocator(function_frame)
 if parameters.solution_file["Read"]:
-    infile=open(parameters.solution_file["Name"]+"_bf",'rb')
+    infile=open(path+parameters.solution_file["Name"]+"_bf",'rb')
     bf_solution=pickle.load(infile)
     infile.close()
-    infile=open(parameters.solution_file["Name"]+"_worst",'rb')
+    infile=open(path+parameters.solution_file["Name"]+"_worst",'rb')
     worst_solution=pickle.load(infile)
     infile.close()
 else:
     bf_solution,worst_solution=allocator_bf.solve_problem()
     allocator_bf.postprocess_solution(bf_solution)
     allocator_bf.postprocess_solution(worst_solution)
-    bf_solution.save_solution(parameters.solution_file["Name"]+"_bf")
-    worst_solution.save_solution(parameters.solution_file["Name"]+"_worst")
+    bf_solution.save_solution(path+parameters.solution_file["Name"]+"_bf")
+    worst_solution.save_solution(path+parameters.solution_file["Name"]+"_worst")
 
 allocator_bf.show_solution(bf_solution)
 allocator_bf.show_solution(worst_solution)

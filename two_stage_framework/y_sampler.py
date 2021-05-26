@@ -1,20 +1,22 @@
 import numpy as np
 import random
 import pickle
+import os
 
 from ProgressBar import ProgressBar
 
 class y_sampler(object):
-    def __init__(self,path_planner):
+    def __init__(self,path_planner,path):
         parameters=path_planner.parameters
         self.X=path_planner.X
         self.E=parameters.E
         self.N=parameters.N
         self.hazards=parameters.hazards
         self.sample_Tau_Ys=parameters.sample_Tau_Ys
+        
+        print("...Reading samples...")
         if parameters.samples_file["Read"]:
-            print("...Reading samples...")
-            infile=open(parameters.samples_file["Name"],'rb')
+            infile=open(path+parameters.samples_file["Name"],'rb')
             self.episodes=pickle.load(infile)
             infile.close()
         else:
@@ -23,7 +25,7 @@ class y_sampler(object):
             self.episodes=self.generate_episodes()
             self.add_cheat_sample()
             print("...Saving samples...")
-            outfile=open(parameters.samples_file["Name"],'wb')
+            outfile=open(path+parameters.samples_file["Name"],'wb')
             pickle.dump(self.episodes,outfile)
             outfile.close()
 
